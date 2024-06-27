@@ -5,4 +5,4 @@ y en los enlaces presentados en este "README", se enviará a las diferentes expl
 
 ## PARTES DEL PROYECTO
 
-- [CUBIERTA](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links)
+- [CUBIERTA](https://github.com/diegogovea/PersonalPortfolio-DLGO/tree/cover1)
