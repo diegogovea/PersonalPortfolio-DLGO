@@ -1,3 +1,3 @@
-# PORTAFOLIO PERSONAL
+# CREACIÓN DE CUBIERTA PRINCIPAL
 
-La principal intención de este repo es aprender las bases de HTML, CSS y JavaScript, por lo que en la rama principal se 
+En esta primera sección no hemos hecho uso de nuestro archivo de JS
