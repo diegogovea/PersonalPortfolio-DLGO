@@ -1,2 +1,3 @@
-# PersonalPortfolio-DLGO
-Este es un portafolio personal, que va a servir como plantilla para ir aprendiendo HTML y CSS y JavaScript
+# PORTAFOLIO PERSONAL
+
+La principal intención de este repo es aprender las bases de HTML, CSS y JavaScript, por lo que en la rama principal se 
