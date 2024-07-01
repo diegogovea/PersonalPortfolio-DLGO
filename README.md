@@ -6,4 +6,4 @@ y en los enlaces presentados en este "README", se enviará a las diferentes expl
 ## RAMAS DEL PROYECTO
 
 - [CUBIERTA](https://github.com/diegogovea/PersonalPortfolio-DLGO/tree/cover1)
-- [INFORMACIÓN](https://github.com/diegogovea/PersonalPortfolio-DLGO/tree/cover1)
+- [INFORMACIÓN](https://github.com/diegogovea/PersonalPortfolio-DLGO/tree/info1).
