@@ -37,10 +37,14 @@ body {
     position: relative;
     width: 66rem;
     height: 45rem;
+    padding: 2rem;
+    
 }
 
 .cover {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 50%;
     height: 100%;
     background: var(--cover-color);
@@ -73,9 +77,25 @@ body {
     background: var(--pages-color);
     box-shadow: 0 0 .6rem rgba(0, 0, 0, .1);
     display: flex;
+    padding: 2rem;
 }
 
-img {
+.profile-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: seagreen;
+}
+
+.profile-page img{
+    max-width: 150px;
+    border-radius: 50%;
+    border: .25rem solid var(--main-color);
+    margin-bottom: .8rem;
+}
+
+/*img {
     max-width: 25%;
     height: auto;
-}
+}*/
