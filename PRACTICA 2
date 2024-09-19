@@ -1,0 +1,91 @@
+import random
+
+class EntornoAspiradora:
+    def __init__(self, num_habitaciones=None):
+        # Generar un número aleatorio de habitaciones entre 3 y 10 si no se proporciona un número
+        self.num_habitaciones = num_habitaciones or random.randint(3, 10)
+        # El estado de cada habitación: 'sucio' o 'limpio'
+        self.estado = {f'Habitación {i+1}': random.choice(['sucio', 'limpio']) for i in range(self.num_habitaciones)}
+        # Posición inicial de la aspiradora
+        self.posicion = random.choice(list(self.estado.keys()))
+    
+    def mostrar_estado(self):
+        print(f"Estado de las habitaciones: {self.estado}")
+        print(f"Aspiradora en: {self.posicion}")
+
+    def sensor(self):
+        # Detecta si la posición actual está sucia o limpia
+        return self.estado[self.posicion]
+    
+    def actuador(self, accion):
+        if accion == 'limpiar':
+            print(f"Limpieza en {self.posicion}")
+            self.estado[self.posicion] = 'limpio'
+        elif accion == 'mover':
+            # Mover la aspiradora a una habitación aleatoria diferente
+            habitaciones_disponibles = [h for h in self.estado.keys() if h != self.posicion]
+            self.posicion = random.choice(habitaciones_disponibles)
+            print(f"La aspiradora se ha movido a {self.posicion}")
+    
+    def medir_rendimiento(self):
+        # Devuelve el número de habitaciones limpias
+        return sum(1 for estado in self.estado.values() if estado == 'limpio')
+    
+    def todas_limpias(self):
+        # Verificar si todas las habitaciones están limpias
+        return all(estado == 'limpio' for estado in self.estado.values())
+
+
+class AgenteReactivo:
+    def __init__(self, entorno):
+        self.entorno = entorno
+        self.puntuacion = 0
+    
+    def ejecutar(self):
+        iteraciones = 0
+        while not self.entorno.todas_limpias():
+            iteraciones += 1
+            print(f"Iteración {iteraciones}:")
+            self.entorno.mostrar_estado()
+            
+            # El agente reacciona al estado actual (si está sucia, limpia; si está limpia, se mueve)
+            if self.entorno.sensor() == 'sucio':
+                self.entorno.actuador('limpiar')
+            else:
+                self.entorno.actuador('mover')
+            print()
+
+        # Guardar el rendimiento de esta ejecución
+        self.puntuacion = self.entorno.medir_rendimiento()
+        print(f"¡Todas las habitaciones están limpias en {iteraciones} iteraciones!")
+        print(f"Rendimiento: {self.puntuacion}/{self.entorno.num_habitaciones} habitaciones limpias")
+
+
+class Simulador:
+    def __init__(self, num_simulaciones):
+        self.num_simulaciones = num_simulaciones
+        self.puntuaciones = []
+
+    def ejecutar_simulaciones(self):
+        for i in range(self.num_simulaciones):
+            print(f"\n--- Simulación {i+1} ---")
+            entorno = EntornoAspiradora()
+            agente = AgenteReactivo(entorno)
+            agente.ejecutar()
+            self.puntuaciones.append(agente.puntuacion)
+
+    def calcular_puntuacion_media(self):
+        if self.puntuaciones:
+            puntuacion_media = sum(self.puntuaciones) / len(self.puntuaciones)
+            print(f"\nPuntuación media global: {puntuacion_media:.2f}")
+        else:
+            print("No se han realizado simulaciones.")
+
+
+# Número de simulaciones a realizar
+num_simulaciones = 5
+
+# Crear el simulador y ejecutar las simulaciones
+simulador = Simulador(num_simulaciones)
+simulador.ejecutar_simulaciones()
+simulador.calcular_puntuacion_media()
