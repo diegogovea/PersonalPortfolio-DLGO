@@ -1,0 +1,63 @@
+import random
+
+class EntornoAspiradora:
+    def __init__(self):
+        # Habitaciones
+        self.num_habitaciones = random.randint(3, 10)
+        # El estado de cada habitación: 'sucio' o 'limpio'
+        self.estado = {f'Habitación {i+1}': random.choice(['sucio', 'limpio']) for i in range(self.num_habitaciones)}
+        # Posición inicial de la aspiradora
+        self.posicion = random.choice(list(self.estado.keys()))
+    
+    def mostrar_estado(self):
+        print(f"Estado de las habitaciones: {self.estado}")
+        print(f"Aspiradora en: {self.posicion}")
+
+    def sensor(self):
+        # Detecta si la posición actual está sucia o limpia
+        return self.estado[self.posicion]
+    
+    def actuador(self, accion):
+        if accion == 'limpiar':
+            print(f"Limpieza en {self.posicion}")
+            self.estado[self.posicion] = 'limpio'
+        elif accion == 'mover':
+            # Mover la aspiradora a una habitación aleatoria diferente
+            habitaciones_disponibles = [h for h in self.estado.keys() if h != self.posicion]
+            self.posicion = random.choice(habitaciones_disponibles)
+            print(f"La aspiradora se ha movido a {self.posicion}")
+    
+    def medir_rendimiento(self):
+        # Devuelve el número de habitaciones limpias
+        return sum(1 for estado in self.estado.values() if estado == 'limpio')
+    
+    def todas_limpias(self):
+        # Verificar si todas las habitaciones están limpias
+        return all(estado == 'limpio' for estado in self.estado.values())
+
+
+class Aspiradora:
+    def __init__(self, entorno):
+        self.entorno = entorno
+    
+    def ejecutar(self):
+        iteraciones = 0
+        while not self.entorno.todas_limpias():
+            iteraciones += 1
+            print(f"Iteración {iteraciones}:")
+            self.entorno.mostrar_estado()
+            if self.entorno.sensor() == 'sucio':
+                self.entorno.actuador('limpiar')
+            else:
+                self.entorno.actuador('mover')
+            print()
+
+        # Mostrar estado final y rendimiento
+        rendimiento = self.entorno.medir_rendimiento()
+        print(f"¡Todas las habitaciones están limpias en {iteraciones} iteraciones!")
+        print(f"Rendimiento: {rendimiento}/{self.entorno.num_habitaciones} habitaciones limpias")
+
+entorno = EntornoAspiradora()
+aspiradora = Aspiradora(entorno)
+
+aspiradora.ejecutar()
